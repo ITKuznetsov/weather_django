@@ -5,6 +5,11 @@
     <title>Погода</title>
 </head>
 <body>
-    <h1>Погода будет здесь</h1>
+    <h1>Заполните форму ниже:</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Найти!</button>
+    </form>
 </body>
 </html>

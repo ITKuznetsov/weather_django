@@ -7,4 +7,3 @@ venv
 .git
 fixtures
 migrations
-forms.py

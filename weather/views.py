@@ -1,8 +1,11 @@
 from django.shortcuts import render
 
+from weather.forms import CityForm
+
 
 def index(request):
     return render(request, 'weather/index.html')
 
 def weather(request):
-    return render(request, 'weather/weather.html')
+    form = CityForm()
+    return render(request, 'weather/weather.html', {'form': form})
