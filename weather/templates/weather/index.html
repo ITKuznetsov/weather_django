@@ -5,6 +5,18 @@
     <title>Главная страница</title>
 </head>
 <body>
+    {% if user.is_authenticated %}
+        <h1>Привет, {{user.first_name}}!</h1>
+        <a href="{% url "user:logout" %}">Выйти?</a>
+    {% else %}
+        <h1>Привет, без регистрации функционал ограничен!</h1>
+        <li>
+            <a href="{% url "user:login" %}">Войти</a>
+        </li>
+        <li>
+            <a href="{% url "user:registration" %}">Регистрация</a>
+        </li>
+    {% endif %}
     <h1>Погода</h1>
 </body>
 </html>
