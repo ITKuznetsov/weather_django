@@ -4,7 +4,8 @@ from weather.forms import CityForm
 
 
 def index(request):
-    return render(request, 'weather/index.html')
+    form = CityForm()
+    return render(request, 'weather/index.html', {'form': form})
 
 def weather(request):
     form = CityForm()

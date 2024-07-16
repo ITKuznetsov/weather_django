@@ -5,5 +5,4 @@ app_name = 'weather'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('weather/', views.weather, name='weather'),
 ]

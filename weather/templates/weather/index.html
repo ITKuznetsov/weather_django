@@ -17,6 +17,11 @@
             <a href="{% url "user:registration" %}">Регистрация</a>
         </li>
     {% endif %}
-    <h1>Погода</h1>
+    <h1>Прогноз погоды в вашем городе:</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Найти!</button>
+    </form>
 </body>
 </html>
