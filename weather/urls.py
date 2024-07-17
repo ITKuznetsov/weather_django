@@ -4,5 +4,5 @@ from django.urls import path
 app_name = 'weather'
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.WeatherView.as_view(), name='index'),
 ]
