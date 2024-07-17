@@ -1,12 +1,15 @@
 from django.views import View
 from django.shortcuts import render
+
+from common.views import TitleMixin, WeatherTitleMixin
 from .forms import CityForm
 from .utils import get_weather
 from .models import SearchHistory
 
-class WeatherView(View):
+class WeatherView(WeatherTitleMixin, View):
     form_class = CityForm
     template_name = 'weather/index.html'
+    title = 'Погода'
     
     def get(self, request):
         form = self.form_class()
@@ -21,7 +24,12 @@ class WeatherView(View):
             form = self.form_class(initial={'city': city})
             weather_data = get_weather(city)
 
-        return render(request, self.template_name, {'form': form, 'weather_data': weather_data, 'last_city': last_city})
+        return render(request, self.template_name, {
+            'form': form,
+            'weather_data': weather_data,
+            'last_city': last_city,
+            'title': self.get_title()
+        })
 
     def post(self, request):
         form = self.form_class(request.POST)
@@ -40,5 +48,14 @@ class WeatherView(View):
                 history = SearchHistory.objects.filter(user=request.user).order_by('-created_at')
                 if history.count() > 1:
                     last_city = history[1]
-            return render(request, self.template_name, {'form': form, 'weather_data': weather_data, 'last_city': last_city})
-        return render(request, self.template_name, {'form': form, 'last_city': last_city})
+            return render(request, self.template_name, {
+                'form': form,
+                'weather_data': weather_data,
+                'last_city': last_city,
+                'title': self.get_title()
+            })
+        return render(request, self.template_name, {
+            'form': form,
+            'last_city': last_city,
+            'title': self.get_title()
+        })

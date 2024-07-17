@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Главная страница</title>
+    <title>{{ title }}</title>
 </head>
 <body>
     {% if user.is_authenticated %}
@@ -17,6 +17,8 @@
             <a href="{% url 'user:registration' %}">Регистрация</a>
         </li>
     {% endif %}
+    <h2>API:</h2>
+    <a href="{% url 'api:city-counts' %}">/api/city-counts/</a>
     <h1>Прогноз погоды в вашем городе:</h1>
     {% if last_city %}
         <h2>Ваш последний запрос: <a href="?city={{ last_city.city }}">{{ last_city.city }}</a></h2>
